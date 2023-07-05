@@ -1,5 +1,5 @@
 # RWKV-Tensorflow2.0
- A RWKV written in TensorFlow 2.0,only tested under FP32 precision in the World model.<\br>
+ A RWKV written in TensorFlow 2.0,only tested under FP32 precision in the World model.  
  一个使用Tensorflow2.0编写的RWKV模型加载器.目前只支持FP32下加载模型,模型方面我只测试了World 0.1B/0.4B模型
 
 此仓库与ChatRWKV v2(经过一点修改)后误差平均值小于1.3238086e-05

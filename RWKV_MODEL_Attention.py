@@ -328,7 +328,7 @@ class TimeMixLast(Layer):
         outputs = inputs_x + rwkvo
         return outputs
 
-kv_cache = None
+
 class TimeMix(Layer):
     def __init__(self, layer_idx, weights_dict,parallel_mode=False, trainable=True):
         super(TimeMix, self).__init__(name=f"time_mix_{layer_idx}", trainable=trainable)
@@ -353,11 +353,7 @@ class TimeMix(Layer):
                                initial_state_dict['time_mix_state_p'])
 
         kv, r, output_state_x = self.time_mix_first(inputs, input_state=input_state_x)
-        global  kv_cache
-        if kv_cache is None:
-            kv_cache = kv
-        else:
-            print(tf.reduce_mean(tf.abs(kv_cache - kv)))
+
         wkv, output_state_a, output_state_b, output_state_p = self.time_mix_rnn(kv, initial_state=input_state_rnn)
         outputs = self.time_mix_last(inputs, inputs_r=r, inputs_wkv=wkv)
 
@@ -687,7 +683,7 @@ class RWKV(Model):
             next_states.append(output_states)
 
             if attention_layer is not None:
-                outputs_sequence, cache_k, cache_v = attention_layer(outputs_sequence, kv_cahe=att_kv_caches,
+                outputs_sequence, cache_k, cache_v = attention_layer(outputs_sequence, kv_cache=att_kv_caches,
                                                                      att_mask=None, training=training)
                 output_caches = {
                     'att_cache_k': cache_k,

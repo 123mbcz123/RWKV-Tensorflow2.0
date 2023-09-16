@@ -1,4 +1,4 @@
-# RWKV-Tensorflow2.0
+# RWKV4-Tensorflow2.0
  A RWKV written in TensorFlow 2.0,only tested under FP32 precision in the World model.  
  RWKV_MODEL.py is the TensorFlow version implementation of RWKV, while the remaining files were copied from chatRWKV for testing accuracy with this repository.  
  
@@ -16,3 +16,5 @@ RWKV_MODEL 是第一版实现,TimeMix基于RNN实现,但是存在注释混乱的
 RWKV_MODEL_Attention 是第二版实现,现在基本是不可用的存在. 这个版本加入了MultiQueryAttention,但是未经过测试,这个版本着重引入了并行版本的RWKV,但是存在精度问题,需要下一个版本解决.  
 
 上两版都不建议使用,更加完善的第三版将在解决并行状态下精度问题后提交,到时候也会对Attention机制进行拆分.Attention将采用类似插件的方式或者集成的方式挂载到RWKV上.  
+
+暂时找不到在不写算子的情况下，可以使RWKV4高效并行训练的方法，想使用可以使用第一版，串行推理的效率与ChatRWKV接近。
